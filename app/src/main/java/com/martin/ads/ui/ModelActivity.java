@@ -90,7 +90,7 @@ public class ModelActivity extends Activity {
             boolean createNew=false;
             ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","CameraSettings.yaml","CameraSettings.yaml",createNew);
             ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","config.txt","config.txt",createNew);
-            //ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","ORBvoc.txt.arm.bin","ORBvoc.txt.arm.bin",createNew);
+            ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","ORBvoc.txt.arm.bin","ORBvoc.txt.arm.bin",createNew);
             //ZipHelper.upZipFile(new File(Environment.getExternalStorageDirectory().getPath()+"/CLM/clm_model.zip"),
 //                        Environment.getExternalStorageDirectory().getPath()+"/CLM");
             return true;
