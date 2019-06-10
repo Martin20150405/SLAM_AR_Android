@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ff000000">
+
+    <com.martin.ads.ui.CameraGLView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/my_fake_glsurface_view" />
+
+    <com.martin.ads.rendering.gles.GLRootView
+        android:id="@+id/ar_object_view_gles1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<com.martin.ads.rendering.gles.GLRootView-->
+        <!--android:id="@+id/ar_object_view_gles2_sphere"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+
+    <com.martin.ads.rendering.gles.GLRootView
+        android:id="@+id/ar_object_view_gles2_obj"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <View
+        android:id="@+id/touch_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <include layout="@layout/toolbar" />
+
+</RelativeLayout>

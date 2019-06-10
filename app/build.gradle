@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.martin.ads.slamar2"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11", "-frtti", "-fexceptions"
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang","-DCMAKE_BUILD_TYPE=Release"
+/*, '-DANDROID_STL=gnustl_static'*/
+            }
+        }
+        ndk {
+            abiFilters 'armeabi-v7a'/*,'x86'*/
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+//    splits {
+//        abi {
+//            // Enables building multiple APKs per ABI.
+//            enable true
+//            // By default all ABIs are included, so use reset() and include to specify that we only
+//            // want APKs for x86, armeabi-v7a, and mips.
+//            // Resets the list of ABIs that Gradle should create APKs for to none.
+//            reset()
+//            // Specifies a list of ABIs that Gradle should create APKs for.
+//            include "x86", "armeabi-v7a"
+//            // Specifies that we do want to also generate a universal APK that includes all ABIs.
+//            universalApk false
+//        }
+//    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'de.javagl:obj:0.3.0'
+    testCompile 'junit:junit:4.12'
+    implementation project(':OpenCVLibrary340')
+}
