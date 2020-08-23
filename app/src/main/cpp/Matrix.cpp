@@ -5,6 +5,7 @@
 #include "Matrix.h"
 #include <cmath>
 #include <cstring>
+#include <string>
 #include <algorithm>
 #include <include/Common.h>
 

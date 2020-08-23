@@ -160,8 +160,6 @@ add_library(SLAM_CORE SHARED
 
         ###Martin
         src/main/cpp/Utils.cpp
-        src/main/cpp/Thirdparty/profiling/ldb.cc
-        src/main/cpp/Thirdparty/profiling/ldb.h
         )
 
 

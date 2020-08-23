@@ -23,12 +23,10 @@
 #include "ORBmatcher.h"
 #include <thread>
 #include <Utils.h>
-#include <Thirdparty/profiling/ldb.h>
 
 namespace ORB_SLAM2
 {
 
-const bool USE_LDB_FEATURE= false;
 long unsigned int Frame::nNextId=0;
 bool Frame::mbInitialComputations=true;
 float Frame::cx, Frame::cy, Frame::fx, Frame::fy, Frame::invfx, Frame::invfy;
@@ -192,14 +190,9 @@ Frame::Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extra
 
     logTime();
     recordTime();
-    if(!USE_LDB_FEATURE){
-        // ORB extraction
-        ExtractORB(0,imGray);
-    }else{
-        LDB ldb;
-        FAST(imGray,mvKeys,15);
-        ldb.compute(imGray,mvKeys,mDescriptors);
-    }
+    // ORB extraction
+    ExtractORB(0,imGray);
+
     logTime();
     N = mvKeys.size();
     LOGD("mvKeys.size %d",N);

@@ -12,14 +12,28 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11", "-frtti", "-fexceptions"
-                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang","-DCMAKE_BUILD_TYPE=Release"
-/*, '-DANDROID_STL=gnustl_static'*/
+                cppFlags "-std=c++11 -frtti -fexceptions"
+                arguments "-DANDROID_ABI=armeabi-v7a"
+                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_ARM_NEON=TRUE"
+                arguments  "-DANDROID_TOOLCHAIN=clang"
+                arguments  "-DCMAKE_BUILD_TYPE=Release"
+                arguments  "-DBUILD_FAT_JAVA_LIBS"
+                arguments  '-DANDROID_STL=gnustl_static'
             }
         }
         ndk {
             abiFilters 'armeabi-v7a'/*,'x86'*/
         }
     }
+
+    packagingOptions {
+
+        pickFirst 'lib/armeabi-v7a/libopencv_java.so'
+        pickFirst 'lib/armeabi-v7a/libopencv_java3.so'
+
+    }
+
     buildTypes {
         release {
             minifyEnabled true
