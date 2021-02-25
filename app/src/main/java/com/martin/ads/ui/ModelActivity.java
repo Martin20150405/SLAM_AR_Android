@@ -9,12 +9,14 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.martin.ads.slamar.R;
 import com.martin.ads.utils.ZipHelper;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * Created by Ads on 2016/11/28.
@@ -88,9 +90,10 @@ public class ModelActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             boolean createNew=false;
-            ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","CameraSettings.yaml","CameraSettings.yaml",createNew);
-            ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","config.txt","config.txt",createNew);
-            ZipHelper.saveFile(context,Environment.getExternalStorageDirectory().getPath()+"/SLAM","ORBvoc.txt.arm.bin","ORBvoc.txt.arm.bin",createNew);
+            String resDir = context.getExternalFilesDir("SLAM").getAbsolutePath();
+            ZipHelper.saveFile(context,resDir,"CameraSettings.yaml","CameraSettings.yaml",createNew);
+            ZipHelper.saveFile(context,resDir,"config.txt","config.txt",createNew);
+            ZipHelper.saveFile(context,resDir,"ORBvoc.txt.arm.bin","ORBvoc.txt.arm.bin",createNew);
             //ZipHelper.upZipFile(new File(Environment.getExternalStorageDirectory().getPath()+"/CLM/clm_model.zip"),
 //                        Environment.getExternalStorageDirectory().getPath()+"/CLM");
             return true;

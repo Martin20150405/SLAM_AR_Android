@@ -7,8 +7,6 @@ package com.martin.ads.ui;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +27,9 @@ import com.martin.ads.utils.TouchHelper;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class ArCamUIActivity extends AppCompatActivity implements
         CameraGLViewBase.CvCameraViewListener2{
@@ -192,7 +193,9 @@ public class ArCamUIActivity extends AppCompatActivity implements
 
         if (!initFinished) {
             initFinished=true;
-            nativeHelper.initSLAM(Environment.getExternalStorageDirectory().getPath()+"/SLAM/");
+            String resDir = this.getExternalFilesDir("SLAM").getAbsolutePath()+"/";
+            Log.d(TAG, "onResume: "+resDir);
+            nativeHelper.initSLAM(resDir);
         }
     }
 

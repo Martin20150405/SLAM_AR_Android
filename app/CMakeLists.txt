@@ -5,13 +5,9 @@ set(libs "${CMAKE_SOURCE_DIR}/src/main/jniLibs")
 include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/opencv/include)
 
 #--------------------------------------------------- import ---------------------------------------------------#
-add_library(libopencv_java3 SHARED IMPORTED )
-set_target_properties(libopencv_java3 PROPERTIES
-    IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_java3.so")
-
-add_library(libopencv_java SHARED IMPORTED )
-set_target_properties(libopencv_java PROPERTIES
-    IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_java.so")
+add_library(libopencv_java4 SHARED IMPORTED )
+set_target_properties(libopencv_java4 PROPERTIES
+        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_java4.so")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -fexceptions -frtti")
 
@@ -171,8 +167,9 @@ find_library( # Sets the name of the path variable.
         log)
 
 target_link_libraries(SLAM_CORE
-        libopencv_java3 #used for java sdk
-        libopencv_java #same to static libs
+#        libopencv_java3 #used for java sdk
+#        libopencv_java #same to static libs
+        libopencv_java4
         ${log-lib}
         g2o
         )
@@ -188,8 +185,9 @@ add_library(
         )
 
 target_link_libraries(SLAM_JNI
-        libopencv_java3 #used for java sdk
-        libopencv_java #same to static libs
+        #        libopencv_java3 #used for java sdk
+        #        libopencv_java #same to static libs
+        libopencv_java4
         ${log-lib}
         SLAM_CORE
         EGL

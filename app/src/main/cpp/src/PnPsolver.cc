@@ -490,6 +490,7 @@ double PnPsolver::compute_pose(double R[3][3], double t[3])
   CvMat Ut  = cvMat(12, 12, CV_64F, ut);
 
   cvMulTransposed(M, &MtM, 1);
+
   cvSVD(&MtM, &D, &Ut, 0, CV_SVD_MODIFY_A | CV_SVD_U_T);
   cvReleaseMat(&M);
 

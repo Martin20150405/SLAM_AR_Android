@@ -5,7 +5,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.martin.ads.rendering.render.ObjectRenderer;
@@ -17,6 +16,8 @@ import java.io.IOException;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TestObjActivity extends AppCompatActivity implements GLSurfaceView.Renderer{
     private static final String TAG = "MainActivity";

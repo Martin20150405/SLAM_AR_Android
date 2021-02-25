@@ -66,6 +66,7 @@ Java_com_martin_ads_slamar_NativeHelper_initSLAM(JNIEnv *env, jobject instance,
     if(slamInited) return;
     slamInited=true;
     modelPath=path;
+    LOGE("Model Path is %s",modelPath.c_str());
     env->ReleaseStringUTFChars(path_, path);
     ifstream in;
     in.open(modelPath+"config.txt");
