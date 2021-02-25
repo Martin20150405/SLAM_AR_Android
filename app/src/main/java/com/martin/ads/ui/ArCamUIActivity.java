@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.martin.ads.constant.GlobalConstant;
@@ -23,6 +24,7 @@ import com.martin.ads.slamar.NativeHelper;
 import com.martin.ads.slamar.R;
 import com.martin.ads.rendering.render.GLES10Demo;
 import com.martin.ads.rendering.gles.GLRootView;
+import com.martin.ads.utils.FpsMeter;
 import com.martin.ads.utils.TouchHelper;
 
 import org.opencv.core.CvType;
@@ -95,6 +97,9 @@ public class ArCamUIActivity extends AppCompatActivity implements
 
     private boolean detectPlane;
 
+    private FpsMeter mFpsMeter = null;
+    private TextView fpsText;
+
     private void initView(){
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -128,6 +133,10 @@ public class ArCamUIActivity extends AppCompatActivity implements
         });
         //touchView.bringToFront();
         mOpenCvCameraView.init();
+
+        fpsText = findViewById(R.id.text_fps);
+        mFpsMeter = new FpsMeter();
+        mFpsMeter.setResolution(GlobalConstant.RESOLUTION_WIDTH, GlobalConstant.RESOLUTION_HEIGHT);
     }
 
     private void initGLES10Demo() {
@@ -232,6 +241,13 @@ public class ArCamUIActivity extends AppCompatActivity implements
             //Log.d("JNI_", "onCameraFrame: new image finished");
         }
 
+        mFpsMeter.measure();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                fpsText.setText(mFpsMeter.getText());
+            }
+        });
         return mRgba;
     }
     private void showHint(final String str){
